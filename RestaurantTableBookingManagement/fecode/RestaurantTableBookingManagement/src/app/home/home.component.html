@@ -1,0 +1,80 @@
+<div class="container">
+  <h2 style="color: #002147; font-weight: bold; margin-bottom: 30px">
+    Restaurants
+  </h2>
+  <table class="table table-hover">
+    <thead>
+      <tr style="background-color: #002147; color: #fff">
+        <th>Restaurant Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let restaurant of restaurants">
+        <td>{{ restaurant.name }}</td>
+        <td>
+          <button
+            class="btn btn-primary btn-lg"
+            (click)="open(content, restaurant)"
+          >
+            Book
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Book Seat</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true"> X </span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #logWorkForm="ngForm">
+      <div class="form-group">
+        <div class="form-group">
+          <label for="bookingDate">Booking Date</label>
+          <div class="input-group">
+            <input
+              id="bookingDate"
+              class="form-control"
+              name="bookingDate"
+              type="date"
+              [(ngModel)]="bookingDate"
+              required
+            />
+          </div>
+        </div>
+        <div class="input-group">
+          <input
+            id="numOfPersons"
+            class="form-control"
+            placeholder="Number Of Persons"
+            name="numOfPersons"
+            type="number"
+            min="1"
+            [(ngModel)]="numOfPersons"
+            required
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="submit"
+      class="btn btn-outline-dark"
+      (click)="submitBooking()"
+    >
+      Book
+    </button>
+  </div>
+</ng-template>
